@@ -1,0 +1,92 @@
+{
+  "name": "integration-kit",
+  "version": "0.1.0",
+  "description": "Reusable infrastructure for third-party API integrations: OAuth token lifecycle, a resilient HTTP client, and verified, idempotent webhook intake.",
+  "keywords": [
+    "oauth2",
+    "webhooks",
+    "integrations",
+    "http-client",
+    "retry",
+    "rate-limit",
+    "pagination",
+    "hmac"
+  ],
+  "license": "MIT",
+  "author": "jwin345-spec",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jwin345-spec/integration-kit.git"
+  },
+  "homepage": "https://github.com/jwin345-spec/integration-kit#readme",
+  "bugs": "https://github.com/jwin345-spec/integration-kit/issues",
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "CHANGELOG.md"
+  ],
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "build": "tsup",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint . && prettier --check .",
+    "format": "prettier --write .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "demo": "tsx examples/demo-server.ts",
+    "prepublishOnly": "npm run lint && npm run typecheck && npm test && npm run build"
+  },
+  "tsup": {
+    "entry": [
+      "src/index.ts"
+    ],
+    "format": [
+      "esm",
+      "cjs"
+    ],
+    "dts": {
+      "compilerOptions": {
+        "ignoreDeprecations": "6.0"
+      }
+    },
+    "sourcemap": true,
+    "clean": true,
+    "target": "node20",
+    "platform": "node",
+    "splitting": false,
+    "treeshake": true
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^26.6.11",
+    "eslint": "^10.15.0",
+    "eslint-config-prettier": "^10.1.8",
+    "fastify": "^5.12.8",
+    "globals": "^17.14.0",
+    "prettier": "^3.10.1",
+    "tsup": "^8.5.1",
+    "tsx": "^4.23.15",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.74.0",
+    "vitest": "^4.1.12"
+  }
+}
